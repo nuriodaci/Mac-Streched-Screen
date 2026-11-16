@@ -97,7 +97,7 @@ Automated tests use **synthetic EDIDs, fake display platforms and fake recovery 
 
 ## Distribution
 
-The build script produces an ad-hoc-signed local preview by default. Public downloaded binaries should be Developer ID signed and notarized; instructions are in [RELEASING.md](docs/RELEASING.md). Signing/notarization does not make a private API stable. Tagged versions are packaged by GitHub Actions as experimental, ad-hoc-signed previews with SHA-256 checksums. These previews are not notarized.
+The build script produces an ad-hoc-signed local preview by default. Public downloaded binaries should be Developer ID signed and notarized; instructions are in [RELEASING.md](docs/RELEASING.md). Signing/notarization does not make a private API stable. Release previews are packaged manually with SHA-256 checksums. The current preview is ad-hoc signed and is not notarized.
 
 ## License and contributions
 
