@@ -1,0 +1,32 @@
+name: Release preview
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate version
+        shell: bash
+        run: |
+          VERSION=$(sed -n 's/^VERSION="\(.*\)"/\1/p' Scripts/build-app.sh)
+          test "$GITHUB_REF_NAME" = "v$VERSION"
+      - name: Checks
+        run: ./Scripts/check.sh
+      - name: Package preview
+        shell: bash
+        run: |
+          ./Scripts/build-app.sh release
+          ARCH=$(uname -m)
+          cd dist
+          ditto -c -k --keepParent Mac-Streched-Screen.app "Mac-Streched-Screen-${GITHUB_REF_NAME}-macOS-${ARCH}.zip"
+          shasum -a 256 *.zip > SHA256SUMS.txt
+      - name: Publish prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.zip dist/SHA256SUMS.txt --title "Stretch Screen $GITHUB_REF_NAME — Experimental Preview" --prerelease --notes "Experimental macOS preview. Requires macOS 13+. Architecture is specified in the ZIP filename. Ad-hoc signed; not Developer ID signed or notarized. Uses a private display API; see README for compatibility and recovery limits. Checksums are in SHA256SUMS.txt."
