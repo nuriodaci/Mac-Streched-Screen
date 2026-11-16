@@ -2,6 +2,10 @@
 
 <img src="Resources/AppIcon.png" width="96" height="96" alt="Stretch Screen app icon">
 
+**[Download v0.1.0 for Apple Silicon](https://github.com/nuriodaci/Mac-Streched-Screen/releases/download/v0.1.0/Mac-Streched-Screen-v0.1.0-macOS-arm64.zip)** · [Release notes and checksums](https://github.com/nuriodaci/Mac-Streched-Screen/releases/tag/v0.1.0)
+
+macOS 13+ · Experimental preview · Ad-hoc signed, not notarized.
+
 A small Swift / SwiftUI macOS utility for testing a **physical 4:3 output signal** on an external monitor. The monitor's own **Full / Wide / Stretch** scaler fills the panel; this app does not create a virtual display, capture the screen, or stream the desktop.
 
 > **Status: experimental preview, not a production-certified display driver.**
