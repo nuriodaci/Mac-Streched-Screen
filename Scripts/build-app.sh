@@ -75,6 +75,11 @@ cat > "$BUNDLE/Contents/Info.plist" <<PLIST
 </plist>
 PLIST
 
+# Remove linker debug-map object paths before distributing the executables.
+if [ "$CONFIG" = "release" ]; then
+  strip -S "$BUNDLE/Contents/MacOS/$APP_NAME" "$BUNDLE/Contents/Helpers/StretchRestoreHelper"
+fi
+
 echo "==> Signing nested helper, then app"
 if [ "$IDENTITY" = "-" ]; then
   codesign --force --sign - "$BUNDLE/Contents/Helpers/StretchRestoreHelper"
